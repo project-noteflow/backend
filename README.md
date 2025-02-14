@@ -63,8 +63,8 @@ DB_PASSWORD=tu_contraseña
 ```
 ### 5 Generar clave openssl
 ```bash
-  openssl ecparam -genkey -name prime256v1 -noout -out storage/keys/privateKey.pem
-  openssl ec -in storage/keys/private.pem -pubout -out storage/keys/publicKey.pem
+  openssl ecparam -name prime256v1 -genkey -noout -out storage/app/keys/privateKey.pem
+  openssl ec -in storage/app/keys/privateKey.pem -pubout -out storage/app/keys/publicKey.pem
 ```
 ### 6 Iniciar el servidor
 ```bash
