@@ -61,13 +61,7 @@ DB_PASSWORD=tu_contraseña
 ```bash
   php artisan key:generate
 ```
-
-### 5 Ejecutar migraciones y seeders
-```bash
-  php artisan migrate --seed
-```
-
-### 6 Iniciar el servidor
+### 5 Iniciar el servidor
 ```bash
   php artisan serve
 ```
@@ -84,5 +78,3 @@ Próximamente disponible con **Swagger**.
 - **Laravel 11**
 - **MySQL**
 - **JWT Authentication** (`firebase/php-jwt`)
-
----
