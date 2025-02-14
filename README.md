@@ -61,7 +61,12 @@ DB_PASSWORD=tu_contraseña
 ```bash
   php artisan key:generate
 ```
-### 5 Iniciar el servidor
+### 5 Generar clave openssl
+```bash
+  openssl ecparam -genkey -name prime256v1 -noout -out storage/keys/privateKey.pem
+  openssl ec -in storage/keys/private.pem -pubout -out storage/keys/publicKey.pem
+```
+### 6 Iniciar el servidor
 ```bash
   php artisan serve
 ```
