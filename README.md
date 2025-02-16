@@ -30,7 +30,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 ### 1 Clonar el repositorio
 ```bash
   git clone https://github.com/project-noteflow/backend.git
-  cd noteflow-backend
+  cd backend
 ```
 
 ### 2 Instalar dependencias
