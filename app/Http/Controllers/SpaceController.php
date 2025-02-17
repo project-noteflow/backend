@@ -42,4 +42,27 @@ class SpaceController extends Controller
             __('messages.labels.message') => __('messages.space.created')
         ], 201);
     }
+
+    public function update(Request $request)
+    {
+        if ($errorResponse = $this->validateUpdate($request)) {
+            return $errorResponse;
+        }
+
+        $space = Space::where('id_usuario', Auth::user()->id_usuario)->where('id_espacio', $request->id_espacio)->first();
+
+        $data = array_filter($request->only(['nombre', 'descripcion']), fn($value) => !is_null($value) && $value !== '');
+
+        if (empty($data)) {
+            return response()->json([
+                __('messages.labels.message') => __('messages.space.empty'),
+            ], 200);
+        }
+        
+        $space->update($data);
+        
+        return response()->json([
+            __('messages.labels.message') => __('messages.space.updated'),
+        ], 200);
+    }
 }

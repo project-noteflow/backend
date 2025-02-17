@@ -28,6 +28,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::middleware(['role:2'])->group(function () {      
         Route::prefix('space')->group(function () {
             Route::post('/create', [SpaceController::class, 'create']);
+            Route::post('/update', [SpaceController::class, 'update']);
         });
     });
 

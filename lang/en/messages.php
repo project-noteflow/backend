@@ -16,6 +16,8 @@ return [
     ],
     'space' => [
         'created' => 'Space created sucesfully.',
+        'updated' => 'Space updated sucesfully.',
+        'empty' => 'There is nothing to update.',
         'limit' => 'You have reached the maximum number of spaces.'
     ]
 ];

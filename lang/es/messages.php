@@ -16,6 +16,8 @@ return [
     ],
     'space' => [
         'created' => 'Espacio creado exitosamente.',
+        'updated' => 'Espacio actualizado exitosamente.',
+        'empty' => 'No hay nada que actualizar.',
         'limit' => 'Has alcanzado el número máximo de espacios.'
     ]
 ];
