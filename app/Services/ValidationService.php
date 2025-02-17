@@ -12,8 +12,7 @@ class ValidationService
 
         if ($validator->fails()) {
             return response()->json([
-                __('message.labels.message') => $validator->messages(),
-                __('message.labels.error') => $validator->errors()
+                __('messages.labels.message') => $validator->messages(),
             ]);
         }
 
