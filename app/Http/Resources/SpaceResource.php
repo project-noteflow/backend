@@ -14,7 +14,7 @@ class SpaceResource extends JsonResource
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'fecha_creacion' => $this->fecha_creacion,
-            'fecha_modificacion' => $this->fecha_modificacion,
+            'fecha_actualizacion' => $this->fecha_actualizacion,
         ];
     }
 }
