@@ -7,17 +7,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SpaceResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id_espacio' => $this->id_espacio,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
+            'fecha_creacion' => $this->fecha_creacion,
+            'fecha_modificacion' => $this->fecha_modificacion,
         ];
     }
 }

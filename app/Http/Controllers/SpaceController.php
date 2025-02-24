@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SpaceResource;
 use App\Models\Space;
 use App\Services\ValidationService;
 use App\Traits\ValidateSpaceRequests;
@@ -15,6 +16,19 @@ class SpaceController extends Controller
     public function __construct(ValidationService $validationService)
     {
         $this->setValidationService($validationService);
+    }
+
+    public function getSpacesByToken()
+    {
+        $spaces = Space::where('id_usuario', Auth::user()->id_usuario)->get();
+
+        if(!$spaces){
+            return response()->json([
+                __('messages.labels.message') => __('messages.space.not_found')
+            ], 404);
+        }
+
+        return SpaceResource::collection($spaces);
     }
 
     public function create(Request $request)

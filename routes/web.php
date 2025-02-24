@@ -6,18 +6,24 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpaceController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/register', 'register');
+    Route::post('/login', 'login');
+});
+
 
 Route::middleware(['jwt'])->group(function () {
 
     Route::middleware(['role:1'])->group(function () {
-        Route::prefix('users')->group(function () {
-            Route::get('/', [UserController::class, 'getAll']);
-        });
-        
-        Route::prefix('user')->group(function () {
-            Route::post('/create', [UserController::class, 'create']);
+        Route::controller(UserController::class)->group(function () {
+            Route::prefix('users')->group(function () {
+                Route::get('/', 'getAll');
+            });
+
+            Route::prefix('user')->group(function () {
+                Route::post('/create', 'create');
+            });
         });
 
         Route::prefix('rol')->group(function () {
@@ -25,17 +31,25 @@ Route::middleware(['jwt'])->group(function () {
         });
     });
 
-    Route::middleware(['role:2'])->group(function () {      
-        Route::prefix('space')->group(function () {
-            Route::post('/create', [SpaceController::class, 'create']);
-            Route::post('/update', [SpaceController::class, 'update']);
+    Route::middleware(['role:2'])->group(function () {
+        Route::controller(SpaceController::class)->group(function () {
+            Route::prefix('space')->group(function () {
+                Route::post('/create', 'create');
+                Route::post('/update', 'update');
+            });
+
+            Route::prefix('spaces')->group(function () {
+                Route::get('/', 'getSpacesByToken');
+            });
         });
     });
 
     Route::middleware(['role:1,2'])->group(function () {
-        Route::prefix('user')->group(function () {
-            Route::get('/', [UserController::class, 'getByToken']);
-            Route::post('/update', [UserController::class, 'updateByToken']);
+        Route::controller(UserController::class)->group(function () {
+            Route::prefix('user')->group(function () {
+                Route::get('/', 'getByToken');
+                Route::post('/update', 'updateByToken');
+            });
         });
     });
 });
