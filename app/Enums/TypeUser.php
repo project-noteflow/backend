@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum TypeUser: int
 {
-    case Admin = 1;
-    case User = 2;
+    case SuperAdmin = 1;
+    case Admin = 2;
+    case Client = 3;
 }

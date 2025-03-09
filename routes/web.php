@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -15,14 +16,16 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['jwt'])->group(function () {
 
-    Route::middleware(['role:1'])->group(function () {
-        Route::controller(UserController::class)->group(function () {
+    Route::middleware(['role:1,2'])->group(function () {
+        Route::controller(AdminController::class)->group(function () {
             Route::prefix('users')->group(function () {
                 Route::get('/', 'getAll');
             });
 
             Route::prefix('user')->group(function () {
                 Route::post('/create', 'create');
+                Route::put('/deactivate/{id}', 'deactivateUser');
+                Route::put('/activate/{id}', 'activateUser');
             });
         });
 
@@ -31,7 +34,7 @@ Route::middleware(['jwt'])->group(function () {
         });
     });
 
-    Route::middleware(['role:2'])->group(function () {
+    Route::middleware(['role:3'])->group(function () {
         Route::controller(SpaceController::class)->group(function () {
             Route::prefix('space')->group(function () {
                 Route::post('/create', 'create');
@@ -44,11 +47,12 @@ Route::middleware(['jwt'])->group(function () {
         });
     });
 
-    Route::middleware(['role:1,2'])->group(function () {
+    Route::middleware(['role:1,2,3'])->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::prefix('user')->group(function () {
                 Route::get('/', 'getByToken');
                 Route::post('/update', 'updateByToken');
+                Route::put('/deactivate', 'deactiveOwnAccount');
             });
         });
     });

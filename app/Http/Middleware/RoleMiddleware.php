@@ -12,7 +12,7 @@ class RoleMiddleware
     {
         $user = Auth::user();
 
-        if (!$user || !in_array($user->id_rol, $allowedRoles)) {
+        if (!$user || !in_array($user->id_rol, $allowedRoles) || !$user->activo) {
             return response()->json([
                 __('messages.labels.message') => __('auth.unauthorized')
             ], 401);
