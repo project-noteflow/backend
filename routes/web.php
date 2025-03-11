@@ -14,10 +14,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 
-Route::get('/notes/{id_espacio}', [NoteController::class, 'getAllNotes']); 
-Route::post('/create', [NoteController::class, 'createNote']);
-Route::put('/notes/{id_note}', [NoteController::class, 'updateNote']);
-
+Route::controller(NoteController::class)->group(function () {
+    Route::get('/notes/{id_espacio}', 'getAllNotes'); 
+    Route::post('/create', 'createNote');
+    Route::put('/update/{id_note}', 'updateNote');
+});
 
 Route::middleware(['jwt'])->group(function () {
 
