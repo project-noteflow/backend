@@ -19,27 +19,36 @@ class NoteController extends Controller
 }
 
     public function createNote(Request $request)
-      {
-          $request->validate([
-              'id_espacio' => 'required|integer|exists:espacios,id_espacio',
-              'titulo' => 'required|string|max:45',
-              'contenido' => 'nullable|string',
-          ]);
+{
+    $request->validate([
+        'id_espacio' => 'required|integer|exists:espacios,id_espacio',
+        'titulo' => 'required|string|max:45',
+        'contenido' => 'nullable|string',
+    ]);
 
-          $note = Note::create([
-              'id_espacio' => $request->id_espacio,
-              'titulo' => $request->titulo,
-              'contenido' => $request->contenido,
-              'fecha_creacion' => now(),
-              'fecha_actualizacion' => now(),
-              'eliminada' => 1
-          ]);
+    $cantidadNotas = Note::where('id_espacio', $request->id_espacio)->count();
 
-          return response()->json([
-              'message' => 'Nota creada exitosamente',
-              'note' => $note
-          ], 201);
-      }
+    if ($cantidadNotas >= 5) {
+        return response()->json([
+            'message' => 'No se pueden crear más de 5 notas en este espacio'
+        ], 400);
+    }
+
+    $note = Note::create([
+        'id_espacio' => $request->id_espacio,
+        'titulo' => $request->titulo,
+        'contenido' => $request->contenido,
+        'fecha_creacion' => now(),
+        'fecha_actualizacion' => now(),
+        'eliminada' => 1
+    ]);
+
+    return response()->json([
+        'message' => 'Nota creada exitosamente',
+        'note' => $note
+    ], 201);
+}
+
 
    public function updateNote(Request $request, $id_note)
 {
