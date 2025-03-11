@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,6 +13,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::post('/login', 'login');
 });
+
+Route::get('/notes/{id_espacio}', [NoteController::class, 'getAllNotes']); 
+Route::post('/create', [NoteController::class, 'createNote']);
+Route::put('/notes/{id_note}', [NoteController::class, 'updateNote']);
 
 
 Route::middleware(['jwt'])->group(function () {
