@@ -5,10 +5,15 @@ return [
         'message' => 'mensaje',
         'error' => 'error'
     ],
+    'error' => [
+        'exception' => 'Ha sucedido un error, no se pudo realizar la acción.'
+    ],
     'user' => [
         'created' => 'Usuario creado exitosamente.',
         'updated' => 'Usuario actualizado exitosamente.',
         'deleted' => 'Usuario eliminado exitosamente.',
+        'actived' => 'Usuario activado exitosamente',
+        'deactived' => 'Usuario desactivado exitosamente.',
         'not_found' => 'Usuario no encontrado.'
     ],
     'users' => [

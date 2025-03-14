@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\State;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\ValidationService;
 use App\Traits\ValidateUserRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use function Pest\Laravel\json;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -20,23 +20,10 @@ class UserController extends Controller
         $this->setValidationService($validationService);
     }
 
-    public function getAll()
-    {
-        $users = User::all();
-
-        if ($users->isEmpty()) {
-            return response()->json([
-                __('messages.labels.message') => __('messages.users.not_found')
-            ], 404);
-        }
-
-        return UserResource::collection($users);
-    }
-
     public function getByToken()
     {
         $user = Auth::user();
-
+        
         if (!$user) {
             return response()->json([
                 __('messages.labels.message') => __('messages.user.not_found')
@@ -46,25 +33,6 @@ class UserController extends Controller
         return response()->json([
             'data' => new UserResource($user),
         ]);
-    }
-
-    public function create(Request $request)
-    {
-        if ($errorResponse = $this->validateUser($request)) {
-            return $errorResponse;
-        }
-
-        $user = User::create([
-            'nombre' => $request->input('nombre'),
-            'id_rol' => $request->input('rol'),
-            'correo' => $request->input('correo'),
-            'clave' => $request->input('clave')
-        ]);
-
-        return response()->json([
-            __('messages.labels.message') => __('messages.user.created'),
-            'data' => $user
-        ], 201);
     }
 
     public function updateByToken(Request $request)
@@ -78,11 +46,25 @@ class UserController extends Controller
         $data = array_filter($request->only(['nombre', 'correo', 'clave']), fn($value) => !is_null($value) && $value !== '');
 
         if (!empty($data)) {
-            $user->update($data);
+            $user->save($data);
         }
 
         return response()->json([
             __('messages.labels.message') => __('messages.user.updated'),
+        ], 200);
+    }
+
+    public function deactiveOwnAccount()
+    {
+        $user = Auth::user();
+
+        $user->activo = State::deactive->value;
+        $user->save();
+
+        Auth::logout();
+        
+        return response()->json([
+            __('messages.labels.message') => __('messages.user.deactived'),
         ], 200);
     }
 }
