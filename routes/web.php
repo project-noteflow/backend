@@ -14,12 +14,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 
-Route::controller(NoteController::class)->group(function () {
-    Route::get('/notes/{id_espacio}', 'getAllNotes'); 
-    Route::post('/create', 'createNote');
-    Route::put('/update/{id_note}', 'updateNote');
-});
-
 Route::middleware(['jwt'])->group(function () {
 
     Route::middleware(['role:1,2'])->group(function () {
@@ -50,6 +44,12 @@ Route::middleware(['jwt'])->group(function () {
             Route::prefix('spaces')->group(function () {
                 Route::get('/', 'getSpacesByToken');
             });
+        });
+
+        Route::controller(NoteController::class)->group(function () {
+            Route::get('/notes/{id_espacio}', 'getAllNotes');
+            Route::post('/create', 'createNote');
+            Route::put('/update/{id_note}', 'updateNote');
         });
     });
 

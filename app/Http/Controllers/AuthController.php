@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'nombre' => $request->input('nombre'),
-            'id_rol' => TypeUser::User,
+            'id_rol' => TypeUser::Client,
             'correo' => $request->input('correo'),
             'clave' => $request->input('clave')
         ]);

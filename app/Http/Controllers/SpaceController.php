@@ -22,7 +22,7 @@ class SpaceController extends Controller
     {
         $spaces = Space::where('id_usuario', Auth::user()->id_usuario)->get();
 
-        if(!$spaces){
+        if (!$spaces) {
             return response()->json([
                 __('messages.labels.message') => __('messages.space.not_found')
             ], 404);
@@ -72,9 +72,9 @@ class SpaceController extends Controller
                 __('messages.labels.message') => __('messages.space.empty'),
             ], 200);
         }
-        
+
         $space->update($data);
-        
+
         return response()->json([
             __('messages.labels.message') => __('messages.space.updated'),
         ], 200);
