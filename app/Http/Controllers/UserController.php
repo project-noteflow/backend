@@ -9,7 +9,6 @@ use App\Services\ValidationService;
 use App\Traits\ValidateUserRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {

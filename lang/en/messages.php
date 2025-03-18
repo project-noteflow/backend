@@ -13,7 +13,7 @@ return [
         'updated' => 'User updated sucesfully.',
         'deleted' => 'User deleted sucesfully.',
         'deactived' => 'User deactived sucesfully.',
-        'actived' => 'User actived sucesfully',
+        'actived' => 'User actived sucesfully.',
         'not_found' => 'User not found.'
     ],
     'users' => [
@@ -25,5 +25,9 @@ return [
         'empty' => 'There is nothing to update.',
         'limit' => 'You have reached the maximum number of spaces.',
         'not_found' => 'Space not found.'
+    ],
+    'note' => [
+        'created' => 'Note created sucesfully.',
+        'limit' => 'You have reached the maximum number of notes for this space.'
     ]
 ];

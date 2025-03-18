@@ -12,8 +12,8 @@ return [
         'created' => 'Usuario creado exitosamente.',
         'updated' => 'Usuario actualizado exitosamente.',
         'deleted' => 'Usuario eliminado exitosamente.',
-        'actived' => 'Usuario activado exitosamente',
         'deactived' => 'Usuario desactivado exitosamente.',
+        'actived' => 'Usuario activado exitosamente',
         'not_found' => 'Usuario no encontrado.'
     ],
     'users' => [
@@ -23,6 +23,11 @@ return [
         'created' => 'Espacio creado exitosamente.',
         'updated' => 'Espacio actualizado exitosamente.',
         'empty' => 'No hay nada que actualizar.',
-        'limit' => 'Has alcanzado el número máximo de espacios.'
+        'limit' => 'Has alcanzado el número máximo de espacios.',
+        'not_found' => 'Espacio no encontrado.'
+    ],
+    'note' => [
+        'created' => 'Nota creada exitosamente.',
+        'limit' => 'Has alcanzado el número máximo de notas para este espacio'
     ]
 ];
