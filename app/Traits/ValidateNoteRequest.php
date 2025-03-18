@@ -24,4 +24,14 @@ trait ValidateNoteRequest
 
         return $this->validationService->validate($request->all(), $rules);
     }
+
+    public function validateUpdate(Request $request)
+    {
+        $rules = [
+            'titulo' => 'string|max:45',
+            'contenido' => 'nullable|string',
+        ];
+
+        return $this->validationService->validate($request->all(), $rules);
+    }
 }

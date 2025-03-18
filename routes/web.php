@@ -47,9 +47,14 @@ Route::middleware(['jwt'])->group(function () {
         });
 
         Route::controller(NoteController::class)->group(function () {
-            Route::get('/notes/{id_espacio}', 'getAllNotes');
-            Route::post('/create', 'createNote');
-            Route::put('/update/{id_note}', 'updateNote');
+            Route::prefix('notes')->group(function () {
+                Route::get('/{id_espacio}', 'getAllNotes');
+            });
+
+            Route::prefix('note')->group(function () {
+                Route::post('/create', 'createNote');
+                Route::post('/update/{id}', 'updateNote');
+            });
         });
     });
 

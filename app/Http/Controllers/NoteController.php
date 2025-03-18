@@ -54,35 +54,35 @@ class NoteController extends Controller
     }
 
 
-    public function updateNote(Request $request, $id_note)
+    public function updateNote(Request $request, $id)
     {
-        $request->validate([
-            'titulo' => 'sometimes|string|max:45',
-            'contenido' => 'nullable|string',
-            'eliminada' => 'nullable|boolean',
-        ]);
+        if ($errorResponse = $this->validateUpdate($request)) {
+            return $errorResponse;
+        }
 
-        $note = Note::find($id_note);
+        $note = Note::find($id);
 
         if (!$note) {
             return response()->json([
-                'message' => 'Nota no encontrada'
+                __('messages.labels.error') => __('messages.note.not_found'),
             ], 404);
         }
 
-        if ($request->has('titulo')) {
-            $note->titulo = $request->titulo;
-        }
-        if ($request->has('contenido')) {
-            $note->contenido = $request->contenido;
+        $data = array_filter($request->only(['titulo', 'contenido']), fn($value) => !is_null($value) && $value !== '');
+
+        if (empty($data)) {
+            return response()->json([
+                __('messages.labels.message') => __('messages.note.empty'),
+            ], 200);
         }
 
+        $note->titulo = isset($request->titulo) ? $request->titulo : $note->titulo;
+        $note->contenido = isset($request->contenido) ? $request->contenido : $note->contenido;
         $note->fecha_actualizacion = now();
         $note->save();
 
         return response()->json([
-            'message' => 'Nota actualizada exitosamente',
-            'note' => $note
+            __('messages.labels.message') => __('messages.note.updated')
         ], 200);
     }
 }
