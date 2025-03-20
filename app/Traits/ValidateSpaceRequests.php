@@ -29,8 +29,9 @@ trait ValidateSpaceRequests
     {
         $rules = [
             'id_espacio' => 'required|integer|exists:espacios,id_espacio',
-            'nombre' => 'sometimes|string:min:6',
-            'descripcion' => 'sometimes|string|min:8',
+            'nombre' => ['sometimes', 'string', 'min:6'],
+            'descripcion' => ['sometimes', 'string', 'min:8'],
+
         ];
 
         return $this->validationService->validate($request->all(), $rules);
