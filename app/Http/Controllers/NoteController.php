@@ -85,4 +85,28 @@ class NoteController extends Controller
             __('messages.labels.message') => __('messages.note.updated')
         ], 200);
     }
+
+
+public function deleteNote($id)
+{
+    $note = Note::where('id_nota', $id)->first();
+
+    if (!$note) {
+        return response()->json([
+            'error' => __('messages.note.not_found'),
+            'debug' => "No existe nota con ID: $id"
+        ], 404);
+    }
+    $note->update(['eliminada' => 1]);
+
+    //(elimina permanentemente):
+    // $note->delete();
+
+    return response()->json([
+        'message' => __('messages.note.deleted'),
+        'deleted_id' => $note->id_nota
+    ], 200);
+}
+
+
 }

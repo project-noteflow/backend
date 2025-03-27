@@ -9,6 +9,7 @@ use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::post('/login', 'login');
@@ -54,6 +55,8 @@ Route::middleware(['jwt'])->group(function () {
             Route::prefix('note')->group(function () {
                 Route::post('/create', 'createNote');
                 Route::post('/update/{id}', 'updateNote');
+                Route::delete('/delete/{id}', 'deleteNote');
+
             });
         });
     });

@@ -30,6 +30,7 @@ return [
         'created' => 'Nota creada exitosamente.',
         'updated' => 'Nota actualizada exitosamente.',
         'empty' => 'No hay nada que actualizar.',
+        'deleted' => 'Nota borrada exitosamente',
         'limit' => 'Has alcanzado el número máximo de notas para este espacio',
         'not_found' => 'Nota no encontrada.'
     ]
