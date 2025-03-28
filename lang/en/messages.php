@@ -31,6 +31,7 @@ return [
         'updated' => 'Note updated successfully.',
         'empty' => 'There is nothing to update.',
         'deleted' => 'Note deleted successfully',
+        'does_not_exit' => 'There is no note with ID: :id',
         'limit' => 'You have reached the maximum number of notes for this space.',
         'not_found' => 'Note not found.'
     ]

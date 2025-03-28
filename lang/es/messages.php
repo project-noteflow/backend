@@ -31,6 +31,7 @@ return [
         'updated' => 'Nota actualizada exitosamente.',
         'empty' => 'No hay nada que actualizar.',
         'deleted' => 'Nota borrada exitosamente',
+        'does_not_exit' => 'No existe nota con ID: :id',
         'limit' => 'Has alcanzado el número máximo de notas para este espacio',
         'not_found' => 'Nota no encontrada.'
     ]

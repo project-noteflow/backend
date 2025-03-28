@@ -94,7 +94,8 @@ public function deleteNote($id)
     if (!$note) {
         return response()->json([
             'error' => __('messages.note.not_found'),
-            'debug' => "No existe nota con ID: $id"
+            'debug' => __('messages.note.does_not_exit', ['id' => $id])
+
         ], 404);
     }
     $note->update(['eliminada' => 1]);
